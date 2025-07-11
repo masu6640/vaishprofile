@@ -1,0 +1,1689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freelance Projects - Syed Masood Hussain</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #01A982;
+            --primary-dark: #018c6d;
+            --accent: #764BA2;
+            --text: rgba(255, 255, 255, 0.9);
+            --text-dim: rgba(255, 255, 255, 0.7);
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --card-border: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Advanced CSS Properties for smooth animations */
+        @property --p {
+            syntax: '<number>';
+            initial-value: 0;
+            inherits: true;
+        }
+
+        @property --v {
+            syntax: '<number>';
+            initial-value: 0;
+            inherits: true;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #070410;
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Background */
+        .bg-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at center, #1a1a2e 0%, #070410 70%),
+                linear-gradient(135deg, #070410 0%, #16213e 50%, #070410 100%);
+            z-index: -1;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: linear-gradient(135deg, 
+                rgba(7, 4, 16, 0.95) 0%, 
+                rgba(22, 33, 62, 0.9) 50%, 
+                rgba(7, 4, 16, 0.95) 100%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transform: translateY(0);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            opacity: 1;
+        }
+
+        .header.hidden {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+
+        .header.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 1.2rem;
+            position: relative;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .logo:hover::before {
+            left: 100%;
+        }
+
+        .logo:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(1, 169, 130, 0.3);
+        }
+
+        .logo img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(1, 169, 130, 0.1), rgba(118, 75, 162, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 25px;
+        }
+
+        .nav-links a:hover::before {
+            opacity: 1;
+        }
+
+        .nav-links a:hover {
+            transform: translateY(-2px);
+            color: var(--primary);
+        }
+
+        .contact-btn {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .contact-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .contact-btn:hover::before {
+            opacity: 1;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4);
+        }
+
+        .back-btn {
+            color: var(--text);
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .back-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(1, 169, 130, 0.2), rgba(118, 75, 162, 0.2));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .back-btn:hover::before {
+            opacity: 1;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 140px 2rem 4rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            gap: 8rem;
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+
+
+        .project-image {
+            --sin: calc(sin(calc(var(--prg) * 0.5 * 3.14159)) * var(--prg));
+            grid-area: 1 / 1 / -1;
+            border: solid 3px rgba(1, 169, 130, 0.3);
+            height: 20em;
+            width: 20em;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 1rem;
+            translate: calc(-150% * var(--mov) * var(--sin));
+            rotate: calc((1 - var(--sin)) * var(--a));
+            transition: border-color 0.3s ease;
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.4),
+                0 0 20px rgba(1, 169, 130, 0.1);
+        }
+
+        .project-image:hover {
+            border-color: rgba(1, 169, 130, 0.6);
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.5),
+                0 0 30px rgba(1, 169, 130, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .stack-section {
+                grid-gap: 0.5em 2em;
+                padding: 1rem;
+            }
+
+            .project-image {
+                height: 16em;
+                width: 16em;
+            }
+
+            .project-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 1rem;
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .logo {
+                font-size: 1rem;
+                padding: 0.5rem 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .back-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .main-content {
+                padding: 120px 1rem 4rem;
+                gap: 4rem;
+            }
+
+            .stack-section {
+                grid-template: repeat(3, max-content) / 1fr;
+                text-align: center;
+            }
+
+            .stack-section::before {
+                grid-area: 1 / 1;
+                text-align: center;
+            }
+
+            .project-card {
+                grid-template: subgrid / 1fr;
+            }
+
+            .project-title {
+                grid-area: 2 / 1;
+                font-size: 1.8rem;
+            }
+
+            .project-subtitle {
+                grid-area: 3 / 1;
+            }
+
+            .project-image {
+                grid-area: 1 / 1;
+                height: 14em;
+                width: 14em;
+                justify-self: center;
+                margin-bottom: 2rem;
+            }
+
+            .nav-controls {
+                grid-area: 4 / 1;
+                justify-content: center;
+            }
+
+            .intro-text h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 0.75rem;
+            }
+
+            .logo {
+                font-size: 0.9rem;
+                padding: 0.5rem 0.75rem;
+            }
+
+            .back-btn {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.85rem;
+            }
+
+            .main-content {
+                padding: 110px 0.75rem 3rem;
+                gap: 3rem;
+            }
+        }
+
+
+
+        /* Freelance Experience Section Styles */
+        .freelance-experience {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem;
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .experience-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 4rem;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1;
+            margin: 0 0 1rem;
+            background: linear-gradient(135deg, var(--primary) 0%, #764BA2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        .section-title span {
+            color: var(--accent);
+        }
+
+        .section-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-dim);
+            margin: 0;
+            font-weight: 400;
+        }
+
+        .experience-intro {
+            text-align: center;
+            margin-bottom: 4rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .experience-intro p {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            color: var(--text);
+            margin: 0;
+        }
+
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .experience-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(1, 169, 130, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .experience-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .experience-card:hover::before {
+            opacity: 1;
+        }
+
+        .card-icon {
+            width: 3rem;
+            height: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .card-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .experience-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+            margin: 0 0 1rem;
+        }
+
+        .experience-card p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-dim);
+            margin: 0;
+        }
+
+        /* Portfolio Showcase Section Styles */
+        .portfolio-showcase {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem;
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .portfolio-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .portfolio-container {
+            margin-top: 3rem;
+            display: flex;
+            gap: 2rem;
+            min-height: 600px;
+        }
+
+        .portfolio-nav {
+            flex: 0 0 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .portfolio-nav-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            width: 100%;
+        }
+
+        .portfolio-nav-btn:not(.coming-soon):hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .portfolio-nav-btn.active {
+            background: rgba(1, 169, 130, 0.1);
+            border-color: rgba(1, 169, 130, 0.3);
+        }
+
+        .portfolio-nav-btn.coming-soon {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .nav-btn-content {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .nav-btn-content img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+        }
+
+        .coming-soon-nav {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 0.5rem;
+        }
+
+        .coming-soon-nav svg {
+            width: 24px;
+            height: 24px;
+            opacity: 0.5;
+        }
+
+        .nav-btn-info h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text);
+            margin: 0 0 0.3rem;
+        }
+
+        .nav-btn-info p {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            margin: 0 0 0.5rem;
+        }
+
+        .nav-btn-tags {
+            display: flex;
+            gap: 0.3rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn-tags span {
+            background: rgba(1, 169, 130, 0.15);
+            color: var(--primary);
+            padding: 0.2rem 0.5rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        .portfolio-display {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 1.5rem;
+            overflow: hidden;
+        }
+
+        .portfolio-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .portfolio-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+            margin: 0 0 0.3rem;
+        }
+
+        .portfolio-description {
+            font-size: 1rem;
+            color: var(--text-dim);
+            margin: 0;
+        }
+
+        .portfolio-external-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-external-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .portfolio-external-btn svg {
+            width: 1rem;
+            height: 1rem;
+        }
+
+        .portfolio-iframe-container {
+            position: relative;
+            height: 500px;
+            background: white;
+        }
+
+        .portfolio-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: white;
+        }
+
+        .iframe-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+            cursor: pointer;
+        }
+
+        .iframe-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .iframe-overlay-content {
+            text-align: center;
+            color: white;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 2rem;
+            border-radius: 1rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .iframe-overlay-content p {
+            font-size: 1.2rem;
+            margin: 0 0 0.5rem;
+            font-weight: 600;
+        }
+
+        .iframe-overlay-content small {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+
+
+        /* Reduced motion support */
+
+
+        /* Award-Winning Immersive Gallery Styles */
+        .immersive-gallery {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem;
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .gallery-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 4rem;
+            padding: 0 1rem;
+        }
+
+        .gallery-title {
+            font-size: 4rem;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1;
+            margin: 0;
+            background: linear-gradient(135deg, var(--primary) 0%, #764BA2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            position: relative;
+        }
+
+        .gallery-title span {
+            display: block;
+            font-size: 4.8rem;
+            margin-top: -0.5rem;
+        }
+
+        .gallery-title::after {
+            content: '';
+            position: absolute;
+            bottom: -1rem;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .gallery-controls {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+
+
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+            perspective: 1000px;
+        }
+
+        .gallery-item-wrapper {
+            position: relative;
+            height: 400px;
+            transform-style: preserve-3d;
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            cursor: pointer;
+        }
+
+        .gallery-item-wrapper.featured {
+            grid-column: span 2;
+            grid-row: span 2;
+            height: auto;
+            min-height: 600px;
+        }
+
+        .gallery-item-3d {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            border-radius: 1.5rem;
+            overflow: hidden;
+        }
+
+        .item-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            transform-style: preserve-3d;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.03);
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.2),
+                0 5px 15px rgba(0, 0, 0, 0.1),
+                0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .item-img-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .item-img-wrapper img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 
+                transform 1s cubic-bezier(0.23, 1, 0.32, 1),
+                filter 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+
+
+        .gallery-item-wrapper:hover .gallery-item-3d {
+            transform: translateZ(20px);
+        }
+
+        .gallery-item-wrapper:hover .item-content {
+            box-shadow: 
+                0 25px 60px rgba(0, 0, 0, 0.3),
+                0 15px 25px rgba(0, 0, 0, 0.2),
+                0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+        }
+
+        .gallery-item-wrapper:hover .item-img-wrapper img {
+            transform: scale(1.1);
+            filter: brightness(0.8) saturate(1.2);
+        }
+
+
+
+        /* Image Preview Modal Styles */
+        .immersive-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .immersive-modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-container {
+            position: relative;
+            width: 90%;
+            max-width: 1400px;
+            max-height: 90vh;
+            display: flex;
+            background: transparent;
+            border-radius: 1rem;
+            overflow: hidden;
+            transform: scale(0.95);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .immersive-modal.active .modal-container {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .modal-close {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .modal-close svg {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        .modal-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-image-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-image {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Responsive Styles */
+        @media (min-width: 768px) {
+            .modal-content {
+                flex-direction: row;
+                gap: 3rem;
+            }
+
+            .modal-image-container {
+                flex: 2;
+            }
+
+            .modal-info {
+                flex: 1;
+                margin-top: 0;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .main-content {
+                padding: 6rem 1.5rem 3rem;
+                gap: 6rem;
+            }
+
+            .freelance-experience,
+            .portfolio-showcase,
+            .immersive-gallery {
+                padding: 3rem;
+            }
+
+            .section-title,
+            .gallery-title {
+                font-size: 3.5rem;
+            }
+
+            .gallery-title span {
+                font-size: 4rem;
+            }
+
+            .experience-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 1.5rem;
+            }
+
+            .portfolio-container {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .portfolio-nav {
+                flex: none;
+                flex-direction: row;
+                overflow-x: auto;
+                gap: 1rem;
+            }
+
+            .portfolio-nav-btn {
+                flex: 0 0 250px;
+            }
+
+            .portfolio-iframe-container {
+                height: 400px;
+            }
+
+            .gallery-container {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 2rem;
+            }
+
+            .gallery-item-wrapper {
+                height: 350px;
+            }
+
+            .gallery-item-wrapper.featured {
+                min-height: 500px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 5rem 1rem 2rem;
+                gap: 4rem;
+            }
+
+            .freelance-experience,
+            .portfolio-showcase,
+            .immersive-gallery {
+                padding: 2rem;
+            }
+
+            .section-title {
+                font-size: 3rem;
+            }
+
+            .experience-header {
+                margin-bottom: 3rem;
+            }
+
+            .experience-intro {
+                margin-bottom: 3rem;
+            }
+
+            .experience-intro p {
+                font-size: 1.1rem;
+            }
+
+            .experience-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .experience-card {
+                padding: 2rem;
+            }
+
+            .portfolio-container {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .portfolio-nav {
+                flex: none;
+                flex-direction: column;
+            }
+
+            .portfolio-nav-btn {
+                flex: none;
+            }
+
+            .portfolio-iframe-container {
+                height: 350px;
+            }
+
+            .portfolio-modal-container {
+                width: 98%;
+                height: 85vh;
+            }
+
+            .portfolio-modal-header {
+                padding: 1rem 1.5rem;
+            }
+
+            .gallery-header {
+                flex-direction: column;
+                gap: 2rem;
+                margin-bottom: 3rem;
+            }
+
+            .gallery-title {
+                font-size: 3rem;
+            }
+
+            .gallery-title span {
+                font-size: 3.5rem;
+            }
+
+            .gallery-container {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .gallery-item-wrapper {
+                height: 300px;
+            }
+
+            .gallery-item-wrapper.featured {
+                grid-column: span 1;
+                min-height: 400px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 4rem 0.75rem 1.5rem;
+                gap: 3rem;
+            }
+
+            .freelance-experience,
+            .portfolio-showcase,
+            .immersive-gallery {
+                padding: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .section-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .experience-intro p {
+                font-size: 1rem;
+            }
+
+            .experience-card {
+                padding: 1.5rem;
+            }
+
+            .experience-card h3 {
+                font-size: 1.3rem;
+            }
+
+            .gallery-title {
+                font-size: 2.5rem;
+            }
+
+            .gallery-title span {
+                font-size: 3rem;
+            }
+
+            .gallery-item-wrapper {
+                height: 250px;
+            }
+
+            .gallery-item-wrapper.featured {
+                min-height: 350px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background -->
+    <div class="bg-layer"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="../index.html" class="logo">
+                <img src="icon (2).png" alt="Vaishnavi DP Logo" width="32" height="32">
+                Vaishnavi DP
+            </a>
+            <div class="nav-links">
+                <a href="../index.html#work">Work</a>
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#experience">Experience</a>
+                <a href="../index.html#contact" class="contact-btn">Contact</a>
+            </div>
+            <a href="index.html" class="back-btn">← Back to Portfolio</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+
+        <!-- Freelance Experience Section -->
+        <section class="freelance-experience">
+            <div class="experience-header">
+                <h2 class="section-title">Freelance <span>Journey</span></h2>
+                <p class="section-subtitle"> Building brands and creating impactful designs across diverse industries
+                Throughout my 4 years of freelance career, I've collaborated with diverse organizations and professionals, delivering creative solutions that make a meaningful impact. From UX design to video production, my work spans multiple disciplines and industries.</p>
+            </div>
+            
+            <div class="experience-content">
+               
+                
+                <div class="experience-grid">
+                    <div class="experience-card">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2L2 7v10c0 5.55 3.84 10 9 10s9-4.45 9-10V7l-10-5z"/>
+                                <path d="M8 11l2 2 4-4"/>
+                            </svg>
+                        </div>
+                        <h3>UX Designer - Ekaa Events</h3>
+                        <p>Served as UX designer creating comprehensive digital and print content for premium event management solutions, focusing on user experience and brand consistency.</p>
+                    </div>
+                    
+                    <div class="experience-card">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                        </div>
+                        <h3>UX Designer - International Foreign Language Academy</h3>
+                        <p>Designed educational digital interfaces and print materials, creating engaging learning experiences for language students across multiple programs.</p>
+                    </div>
+                    
+                    <div class="experience-card">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                                <line x1="8" y1="21" x2="16" y2="21"/>
+                                <line x1="12" y1="17" x2="12" y2="21"/>
+                            </svg>
+                        </div>
+                        <h3>Video Editor - Corporate Content</h3>
+                        <p>Edited promotional videos and corporate content for major companies including Schneider Electric, delivering professional video solutions for marketing campaigns.</p>
+                    </div>
+                    
+                    <div class="experience-card">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                        </div>
+                        <h3>Volunteer Designer - Rotaract Club</h3>
+                        <p>Volunteered as a designer for Rotaract Club (District 3191) for 3+ years, contributing to district-wide events and campaigns, creating impactful social initiatives.</p>
+                    </div>
+                    
+                    <div class="experience-card">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                            </svg>
+                        </div>
+                        <h3>Portfolio & Branding Designer</h3>
+                        <p>Designed portfolios and branding assets for individual professionals, helping them establish strong personal brands and showcase their work effectively.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Showcase Section -->
+        <section class="portfolio-showcase">
+            <div class="portfolio-header">
+                <h2 class="section-title">Portfolio <span>Gallery</span></h2>
+                <p class="section-subtitle">Complete portfolios and websites I've designed and developed</p>
+            </div>
+            
+            <div class="portfolio-container">
+                <!-- Portfolio Navigation -->
+                <div class="portfolio-nav">
+                    <button class="portfolio-nav-btn active" data-portfolio="shreyas">
+                        <div class="nav-btn-content">
+                            <img src="Untitled design (3).png" alt="Shreyas Portfolio" loading="lazy">
+                            <div class="nav-btn-info">
+                                <h4>Shreyas Portfolio</h4>
+                                <p>Personal Website</p>
+                                <div class="nav-btn-tags">
+                                    <span>Web Design</span>
+                                    <span>Frontend</span>
+                                </div>
+                            </div>
+                        </div>
+                    </button>
+                    
+                    <button class="portfolio-nav-btn coming-soon" disabled>
+                        <div class="nav-btn-content">
+                            <div class="coming-soon-nav">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 6v6l4 2"/>
+                                </svg>
+                            </div>
+                            <div class="nav-btn-info">
+                                <h4>More Portfolios</h4>
+                                <p>Coming Soon</p>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+                
+                <!-- Portfolio Display -->
+                <div class="portfolio-display">
+                    <div class="portfolio-controls">
+                        <div class="portfolio-info">
+                            <h3 class="portfolio-title">Shreyas Portfolio</h3>
+                            <p class="portfolio-description">Interactive personal portfolio website with modern design</p>
+                        </div>
+                        <div class="portfolio-actions">
+                            <button class="portfolio-external-btn" data-url="shreyasindex.html">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                                    <polyline points="15,3 21,3 21,9"/>
+                                    <line x1="10" y1="14" x2="21" y2="3"/>
+                                </svg>
+                                Open in New Tab
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="portfolio-iframe-container">
+                        <iframe 
+                            src="shreyasindex.html" 
+                            frameborder="0" 
+                            class="portfolio-iframe"
+                            title="Shreyas Portfolio Preview">
+                        </iframe>
+                        <div class="iframe-overlay">
+                            <div class="iframe-overlay-content">
+                                <p>Click anywhere to interact with the portfolio</p>
+                                <small>Some features may require opening in a new tab</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Award-Winning Immersive Gallery -->
+        <section class="immersive-gallery">
+            <div class="gallery-header">
+                <h2 class="gallery-title">Design <span>Showcase</span></h2>
+            </div>
+            
+            <div class="gallery-container">
+                <div class="gallery-item-wrapper">
+                    <div class="gallery-item-3d">
+                        <div class="item-content">
+                            <div class="item-img-wrapper">
+                                <img src="EKAA 123-1.png" alt="Ekaa Events" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item-wrapper">
+                    <div class="gallery-item-3d">
+                        <div class="item-content">
+                            <div class="item-img-wrapper">
+                                <img src="2 (1).png" alt="Wedding Collection" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item-wrapper featured">
+                    <div class="gallery-item-3d">
+                        <div class="item-content">
+                            <div class="item-img-wrapper">
+                                <img src="1.png" alt="Social Media Campaign" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item-wrapper">
+                    <div class="gallery-item-3d">
+                        <div class="item-content">
+                            <div class="item-img-wrapper">
+                                <img src="2.png" alt="Schneider Electric" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item-wrapper">
+                    <div class="gallery-item-3d">
+                        <div class="item-content">
+                            <div class="item-img-wrapper">
+                                <img src="9.png" alt="Rotaract District" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item-wrapper">
+                    <div class="gallery-item-3d">
+                        <div class="item-content">
+                            <div class="item-img-wrapper">
+                                <img src="banner84 (2)_page-0001.jpg" alt="Print Banner" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item-wrapper">
+                    <div class="gallery-item-3d">
+                        <div class="item-content">
+                            <div class="item-img-wrapper">
+                                <img src="IMG_8472.PNG" alt="Mobile Design" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item-wrapper featured">
+                    <div class="gallery-item-3d">
+                        <div class="item-content">
+                            <div class="item-img-wrapper">
+                                <img src="purpose of education is to replace an empty with anopen one.png" alt="Educational Design" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Image Preview Modal -->
+            <div class="immersive-modal">
+                <div class="modal-bg"></div>
+                <div class="modal-container">
+                    <button class="modal-close">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 6L6 18M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                    <div class="modal-content">
+                        <div class="modal-image-container">
+                            <img src="" alt="" class="modal-image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <script>
+        // Contact button smooth scroll functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactBtn = document.querySelector('.contact-btn');
+            if (contactBtn) {
+                contactBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // Navigate to index.html and scroll to contact section
+                    window.location.href = '../index.html#contact';
+                });
+            }
+        });
+
+        // Header visibility on scroll
+        let lastScrollTop = 0;
+        const header = document.querySelector('.header');
+        
+        function handleHeaderScroll() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Show header only when at the top of the page (within 50px)
+            if (scrollTop <= 50) {
+                header.classList.remove('hidden');
+                header.classList.add('visible');
+            } else {
+                header.classList.remove('visible');
+                header.classList.add('hidden');
+            }
+            
+            lastScrollTop = scrollTop;
+        }
+
+        // Throttle scroll events for better performance
+        let ticking = false;
+        function requestTick() {
+            if (!ticking) {
+                requestAnimationFrame(handleHeaderScroll);
+                ticking = true;
+            }
+        }
+
+        window.addEventListener('scroll', function() {
+            ticking = false;
+            requestTick();
+        });
+
+        // Award-winning immersive gallery functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // 3D Hover Effect
+            const galleryItems = document.querySelectorAll('.gallery-item-wrapper');
+            
+            galleryItems.forEach(item => {
+                const card = item.querySelector('.gallery-item-3d');
+                
+                item.addEventListener('mousemove', e => {
+                    const rect = item.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const angleY = (x - centerX) / 15;
+                    const angleX = (centerY - y) / 15;
+                    
+                    card.style.transform = `rotateY(${angleY}deg) rotateX(${angleX}deg) translateZ(20px)`;
+                });
+                
+                item.addEventListener('mouseleave', () => {
+                    card.style.transform = 'rotateY(0deg) rotateX(0deg) translateZ(0px)';
+                });
+            });
+            
+
+            
+            // Image Preview Modal Functionality
+            const modal = document.querySelector('.immersive-modal');
+            const modalImage = document.querySelector('.modal-image');
+            const modalClose = document.querySelector('.modal-close');
+            
+            galleryItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const img = item.querySelector('.item-img-wrapper img');
+                    modalImage.src = img.src;
+                    modalImage.alt = img.alt;
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            // Close modal on close button click
+            modalClose.addEventListener('click', () => {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+            
+            // Close modal on background click
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal || e.target.classList.contains('modal-bg')) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+            
+            // Close modal on escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.classList.contains('active')) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+
+            // Portfolio Interactive Display Functionality
+            const portfolioNavBtns = document.querySelectorAll('.portfolio-nav-btn[data-portfolio]');
+            const portfolioTitle = document.querySelector('.portfolio-title');
+            const portfolioDescription = document.querySelector('.portfolio-description');
+            const portfolioIframe = document.querySelector('.portfolio-iframe');
+            const portfolioExternalBtn = document.querySelector('.portfolio-external-btn');
+            const iframeOverlay = document.querySelector('.iframe-overlay');
+            
+            // Portfolio data
+            const portfolios = {
+                shreyas: {
+                    title: 'Shreyas Portfolio',
+                    description: 'Interactive personal portfolio website with modern design',
+                    url: 'shreyasindex.html'
+                }
+            };
+            
+            // Portfolio navigation
+            portfolioNavBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const portfolioKey = btn.getAttribute('data-portfolio');
+                    const portfolio = portfolios[portfolioKey];
+                    
+                    if (portfolio) {
+                        // Update active state
+                        portfolioNavBtns.forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        
+                        // Update portfolio display
+                        portfolioTitle.textContent = portfolio.title;
+                        portfolioDescription.textContent = portfolio.description;
+                        portfolioIframe.src = portfolio.url;
+                        portfolioExternalBtn.setAttribute('data-url', portfolio.url);
+                        
+                        // Reset overlay
+                        iframeOverlay.classList.remove('hidden');
+                    }
+                });
+            });
+            
+            // Open in new tab
+            portfolioExternalBtn.addEventListener('click', () => {
+                const url = portfolioExternalBtn.getAttribute('data-url');
+                if (url) {
+                    window.open(url, '_blank');
+                }
+            });
+            
+            // Hide overlay when clicking on iframe area
+            iframeOverlay.addEventListener('click', () => {
+                iframeOverlay.classList.add('hidden');
+            });
+            
+            // Parallax effect on scroll
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY || window.pageYOffset;
+                
+                galleryItems.forEach(item => {
+                    const rect = item.getBoundingClientRect();
+                    const centerY = rect.top + rect.height / 2;
+                    const viewportHeight = window.innerHeight;
+                    
+                    if (centerY > 0 && centerY < viewportHeight) {
+                        const distance = centerY - viewportHeight / 2;
+                        const parallaxValue = distance * 0.05;
+                        
+                        const image = item.querySelector('.item-img-wrapper img');
+                        image.style.transform = `translateY(${parallaxValue}px)`;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

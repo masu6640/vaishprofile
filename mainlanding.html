@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syed Masood Hussain - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #070410;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Background Effects */
+        .bg-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at center, #1a1a2e 0%, #070410 70%),
+                linear-gradient(135deg, #070410 0%, #16213e 50%, #070410 100%);
+            z-index: -3;
+        }
+
+        .blob-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            opacity: 0.4;
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            animation: blob 20s infinite;
+        }
+
+        .blob-1 {
+            background: rgb(59, 130, 246);
+            width: 30vw;
+            height: 30vw;
+            top: 20%;
+            left: 10%;
+            animation: blob1 15s infinite ease-in-out;
+        }
+
+        .blob-2 {
+            background: rgb(167, 139, 250);
+            width: 25vw;
+            height: 25vw;
+            bottom: 20%;
+            right: 10%;
+            animation: blob2 18s infinite ease-in-out;
+        }
+
+        .blob-3 {
+            background: rgb(96, 165, 250);
+            width: 20vw;
+            height: 20vw;
+            top: 60%;
+            left: 60%;
+            animation: blob3 12s infinite ease-in-out;
+        }
+
+        @keyframes blob1 {
+            0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            25% { transform: translate(20px, -50px) scale(1.1) rotate(90deg); }
+            50% { transform: translate(-20px, 20px) scale(0.9) rotate(180deg); }
+            75% { transform: translate(50px, 50px) scale(1.05) rotate(270deg); }
+        }
+
+        @keyframes blob2 {
+            0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            33% { transform: translate(-30px, 30px) scale(1.1) rotate(120deg); }
+            66% { transform: translate(30px, -30px) scale(0.9) rotate(240deg); }
+        }
+
+        @keyframes blob3 {
+            0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            50% { transform: translate(-40px, -40px) scale(1.2) rotate(180deg); }
+        }
+
+        .noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.12;
+            z-index: -1;
+            pointer-events: none;
+            mix-blend-mode: overlay;
+        }
+
+        /* Main Container */
+        .landing-container {
+            text-align: center;
+            z-index: 1;
+            opacity: 0;
+            animation: fadeIn 1.5s ease-out 0.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Logo Container */
+        .logo-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-container:hover {
+            transform: scale(1.05);
+        }
+
+        .main-logo {
+            width: 200px;
+            height: 200px;
+            object-fit: contain;
+            border-radius: 20px;
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(96, 165, 250, 0.2);
+            transition: all 0.4s ease;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+        }
+
+        .logo-container:hover .main-logo {
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.4),
+                0 0 60px rgba(96, 165, 250, 0.4);
+            transform: translateY(-5px);
+        }
+
+        /* Text Content */
+        .landing-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff 0%, #60a5fa 50%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.02em;
+        }
+
+        .landing-content p {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .landing-subtitle {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 3rem;
+        }
+
+        /* Minimize Animation */
+        .minimizing {
+            position: fixed !important;
+            z-index: 9999 !important;
+            transition: all 1.2s cubic-bezier(0.23, 1, 0.32, 1) !important;
+            pointer-events: none;
+        }
+
+        .page-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at center, #1a1a2e 0%, #070410 70%),
+                linear-gradient(135deg, #070410 0%, #16213e 50%, #070410 100%);
+            z-index: 10000;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            backdrop-filter: blur(20px);
+        }
+
+        .page-transition.active {
+            opacity: 1;
+        }
+
+        .page-transition::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 50% 50%, rgba(96, 165, 250, 0.1) 0%, transparent 70%),
+                radial-gradient(circle at 30% 70%, rgba(167, 139, 250, 0.1) 0%, transparent 70%);
+            animation: shimmer 2s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Loading Animation */
+        .loading-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-container.show {
+            opacity: 1;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid #60a5fa;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        /* Enhanced Content Transition */
+        .content-fade-out {
+            opacity: 0 !important;
+            transform: scale(0.95) translateY(20px) !important;
+            filter: blur(10px) !important;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1) !important;
+        }
+
+        /* Ripple Effect */
+        .ripple-effect {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(96, 165, 250, 0.3);
+            transform: scale(0);
+            animation: ripple 1s ease-out;
+            pointer-events: none;
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(20);
+                opacity: 0;
+            }
+        }
+
+        /* Particle Effect */
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #60a5fa;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: particleFloat 2s ease-out forwards;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) scale(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-logo {
+                width: 150px;
+                height: 150px;
+                padding: 15px;
+            }
+
+            .landing-content h1 {
+                font-size: 2.5rem;
+                line-height: 1.2;
+            }
+
+            .landing-content p {
+                font-size: 1.1rem;
+                padding: 0 1.5rem;
+                line-height: 1.5;
+            }
+
+            .landing-subtitle {
+                font-size: 0.9rem;
+                margin-bottom: 2rem;
+            }
+
+            .blob-1, .blob-2, .blob-3 {
+                width: 40vw;
+                height: 40vw;
+            }
+
+            .floating-dot {
+                width: 3px;
+                height: 3px;
+            }
+
+            .progress-ring {
+                bottom: 25px;
+                right: 25px;
+                width: 55px;
+                height: 55px;
+            }
+
+            .progress-ring svg {
+                width: 55px;
+                height: 55px;
+            }
+
+            .progress-text {
+                font-size: 0.75rem;
+            }
+
+            .click-anywhere {
+                font-size: 0.85rem;
+                bottom: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-logo {
+                width: 120px;
+                height: 120px;
+                padding: 10px;
+            }
+
+            .landing-content h1 {
+                font-size: 2rem;
+                line-height: 1.1;
+                margin-bottom: 0.8rem;
+            }
+
+            .landing-content p {
+                font-size: 1rem;
+                padding: 0 1rem;
+                line-height: 1.4;
+            }
+
+            .landing-subtitle {
+                font-size: 0.8rem;
+                margin-bottom: 1.5rem;
+                letter-spacing: 1px;
+            }
+
+            .floating-dot {
+                width: 2px;
+                height: 2px;
+            }
+
+            .logo-glow {
+                top: -15px;
+                left: -15px;
+                width: calc(100% + 30px);
+                height: calc(100% + 30px);
+            }
+
+            .progress-ring {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+            }
+
+            .progress-ring svg {
+                width: 50px;
+                height: 50px;
+                viewBox: 0 0 50 50;
+            }
+
+            .progress-ring-circle {
+                stroke-dasharray: 126; /* 2 * π * 20 */
+                stroke-dashoffset: 126;
+            }
+
+            .progress-ring svg circle {
+                cx: 25;
+                cy: 25;
+                r: 20;
+            }
+
+            .progress-text {
+                font-size: 0.7rem;
+            }
+
+            .click-anywhere {
+                font-size: 0.8rem;
+                bottom: 15px;
+                padding: 0 1rem;
+                text-align: center;
+            }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 320px) {
+            .main-logo {
+                width: 100px;
+                height: 100px;
+                padding: 8px;
+            }
+
+            .landing-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .landing-content p {
+                font-size: 0.9rem;
+                padding: 0 0.8rem;
+            }
+
+            .landing-subtitle {
+                font-size: 0.75rem;
+            }
+
+            .progress-ring {
+                bottom: 15px;
+                right: 15px;
+                width: 45px;
+                height: 45px;
+            }
+
+            .progress-ring svg {
+                width: 45px;
+                height: 45px;
+            }
+
+            .progress-text {
+                font-size: 0.65rem;
+            }
+
+            .click-anywhere {
+                font-size: 0.75rem;
+                bottom: 12px;
+            }
+        }
+
+
+
+
+
+
+
+        .floating-dots {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .floating-dot {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(96, 165, 250, 0.6);
+            border-radius: 50%;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .floating-dot:nth-child(1) {
+            top: 20%;
+            left: 20%;
+            animation-delay: 0s;
+        }
+
+        .floating-dot:nth-child(2) {
+            top: 30%;
+            right: 20%;
+            animation-delay: 0.5s;
+        }
+
+        .floating-dot:nth-child(3) {
+            bottom: 30%;
+            left: 25%;
+            animation-delay: 1s;
+        }
+
+        .floating-dot:nth-child(4) {
+            bottom: 20%;
+            right: 25%;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes float {
+            0%, 100% { 
+                opacity: 0.3;
+                transform: translateY(0) scale(0.8);
+            }
+            50% { 
+                opacity: 1;
+                transform: translateY(-20px) scale(1.2);
+            }
+        }
+
+        /* Glow effect */
+        .logo-glow {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: calc(100% + 40px);
+            height: calc(100% + 40px);
+            background: radial-gradient(circle, rgba(96, 165, 250, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: glow 3s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes glow {
+            0%, 100% { 
+                opacity: 0.5;
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 1;
+                transform: scale(1.1);
+            }
+        }
+
+        /* Auto-redirect progress indicator */
+        .progress-ring {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            transform: rotate(-90deg);
+            z-index: 1000;
+        }
+
+        .progress-ring-circle {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.2);
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-dasharray: 157; /* 2 * π * 25 */
+            stroke-dashoffset: 157;
+            animation: progressCountdown 4s linear;
+        }
+
+        @keyframes progressCountdown {
+            0% {
+                stroke-dashoffset: 157;
+                stroke: rgba(96, 165, 250, 0.8);
+            }
+            100% {
+                stroke-dashoffset: 0;
+                stroke: rgba(96, 165, 250, 1);
+            }
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(90deg);
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .progress-container {
+            opacity: 0;
+            animation: fadeInProgress 0.5s ease-out 0.5s forwards;
+        }
+
+        @keyframes fadeInProgress {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Full page clickable */
+        body {
+            cursor: pointer;
+            touch-action: manipulation;
+        }
+
+        /* Click anywhere indicator */
+        .click-anywhere {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            opacity: 0;
+            animation: fadeInClickAnywhere 1s ease-out 2s forwards;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        @keyframes fadeInClickAnywhere {
+            from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Layers -->
+    <div class="bg-layer"></div>
+    <div class="blob-layer">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+    <div class="noise"></div>
+
+    <!-- Page Transition Overlay -->
+    <div class="page-transition" id="pageTransition">
+        <div class="loading-container" id="loadingContainer">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">Loading Portfolio...</div>
+        </div>
+    </div>
+
+    <!-- Progress Ring -->
+    <div class="progress-ring progress-container" id="progressRing">
+        <svg width="60" height="60" viewBox="0 0 60 60">
+            <circle class="progress-ring-circle" cx="30" cy="30" r="25" id="progressCircle"></circle>
+        </svg>
+        <div class="progress-text" id="progressText">4</div>
+    </div>
+
+    <!-- Click Anywhere Text -->
+    <div class="click-anywhere" id="clickAnywhere">Click anywhere to continue</div>
+
+    <!-- Main Landing Content -->
+    <div class="landing-container">
+        <div class="logo-container" id="logoContainer">
+            <div class="logo-glow"></div>
+            <div class="floating-dots">
+                <div class="floating-dot"></div>
+                <div class="floating-dot"></div>
+                <div class="floating-dot"></div>
+                <div class="floating-dot"></div>
+            </div>
+            <img src="icon (2).png" alt="Vaishnavi DP Logo" class="main-logo" id="mainLogo">
+        </div>
+        
+        <div class="landing-content">
+            <p class="landing-subtitle">Welcome to</p>
+            <h1>VAISHNAVI DP</h1>
+            <p>UX Designer • Electronics Engineer • Creative Developer</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const logoContainer = document.getElementById('logoContainer');
+            const mainLogo = document.getElementById('mainLogo');
+            const pageTransition = document.getElementById('pageTransition');
+            const loadingContainer = document.getElementById('loadingContainer');
+            const landingContainer = document.querySelector('.landing-container');
+            const progressRing = document.getElementById('progressRing');
+            const progressText = document.getElementById('progressText');
+            const clickAnywhere = document.getElementById('clickAnywhere');
+            
+            let autoRedirectTimer;
+            let countdownTimer;
+            let isTransitioning = false;
+
+            // Create ripple effect
+            function createRipple(e) {
+                const ripple = document.createElement('div');
+                ripple.classList.add('ripple-effect');
+                
+                const rect = logoContainer.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                
+                logoContainer.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 1000);
+            }
+
+            // Create particle effects
+            function createParticles(centerX, centerY) {
+                const particleCount = 12;
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('particle');
+                    
+                    const angle = (i / particleCount) * Math.PI * 2;
+                    const distance = 50 + Math.random() * 30;
+                    const x = centerX + Math.cos(angle) * distance;
+                    const y = centerY + Math.sin(angle) * distance;
+                    
+                    particle.style.left = x + 'px';
+                    particle.style.top = y + 'px';
+                    particle.style.animationDelay = Math.random() * 0.3 + 's';
+                    
+                    document.body.appendChild(particle);
+                    
+                    setTimeout(() => {
+                        particle.remove();
+                    }, 2000);
+                }
+            }
+
+            // Enhanced content fade out
+            function fadeOutContent() {
+                landingContainer.classList.add('content-fade-out');
+                
+                // Add staggered animation to individual elements
+                const elements = landingContainer.querySelectorAll('.landing-content h1, .landing-content p, .landing-subtitle');
+                elements.forEach((el, index) => {
+                    setTimeout(() => {
+                        el.style.opacity = '0';
+                        el.style.transform = 'translateY(30px)';
+                        el.style.filter = 'blur(5px)';
+                        el.style.transition = 'all 0.4s ease';
+                    }, index * 100);
+                });
+            }
+
+            // Preload the next page
+            function preloadNextPage() {
+                const link = document.createElement('link');
+                link.rel = 'preload';
+                link.href = 'index.html';
+                link.as = 'document';
+                document.head.appendChild(link);
+            }
+
+            // Start auto-redirect countdown
+            function startAutoRedirect() {
+                let countdown = 4;
+                
+                // Update countdown display
+                countdownTimer = setInterval(() => {
+                    countdown--;
+                    progressText.textContent = countdown;
+                    
+                    if (countdown <= 0) {
+                        clearInterval(countdownTimer);
+                    }
+                }, 1000);
+                
+                // Auto-redirect after 4 seconds
+                autoRedirectTimer = setTimeout(() => {
+                    if (!isTransitioning) {
+                        triggerTransition();
+                    }
+                }, 4000);
+            }
+
+            // Clear auto-redirect timers
+            function clearAutoRedirect() {
+                if (autoRedirectTimer) {
+                    clearTimeout(autoRedirectTimer);
+                    autoRedirectTimer = null;
+                }
+                if (countdownTimer) {
+                    clearInterval(countdownTimer);
+                    countdownTimer = null;
+                }
+            }
+
+            // Main transition function
+            function triggerTransition(clickEvent = null) {
+                if (isTransitioning) return;
+                
+                isTransitioning = true;
+                clearAutoRedirect();
+                
+                // Hide progress ring and click anywhere text
+                progressRing.style.opacity = '0';
+                clickAnywhere.style.opacity = '0';
+                
+                // Create ripple effect if clicked
+                if (clickEvent) {
+                    createRipple(clickEvent);
+                }
+                
+                // Get logo position for animation
+                const rect = mainLogo.getBoundingClientRect();
+                const currentX = rect.left;
+                const currentY = rect.top;
+                const currentWidth = rect.width;
+                const currentHeight = rect.height;
+                const centerX = currentX + currentWidth / 2;
+                const centerY = currentY + currentHeight / 2;
+
+                // Create particle effects
+                setTimeout(() => {
+                    createParticles(centerX, centerY);
+                }, 200);
+
+                // Target position (top-left where the logo will be in the header)
+                const targetX = 32;
+                const targetY = 20;
+                const targetWidth = 40;
+                const targetHeight = 40;
+
+                // Create clone for animation
+                const clone = mainLogo.cloneNode(true);
+                clone.style.position = 'fixed';
+                clone.style.left = currentX + 'px';
+                clone.style.top = currentY + 'px';
+                clone.style.width = currentWidth + 'px';
+                clone.style.height = currentHeight + 'px';
+                clone.style.zIndex = '9999';
+                clone.style.transition = 'all 1.2s cubic-bezier(0.23, 1, 0.32, 1)';
+                clone.style.borderRadius = '20px';
+                clone.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.3), 0 0 40px rgba(96, 165, 250, 0.4)';
+                
+                document.body.appendChild(clone);
+
+                // Start content fade out
+                fadeOutContent();
+                
+                // Hide click indicators
+                const clickIndicators = logoContainer.querySelectorAll('.floating-dots, .logo-glow');
+                clickIndicators.forEach(indicator => {
+                    indicator.style.opacity = '0';
+                    indicator.style.transition = 'opacity 0.3s ease';
+                });
+
+                // Start minimize animation
+                setTimeout(() => {
+                    clone.style.left = targetX + 'px';
+                    clone.style.top = targetY + 'px';
+                    clone.style.width = targetWidth + 'px';
+                    clone.style.height = targetHeight + 'px';
+                    clone.style.borderRadius = '50px';
+                    clone.style.opacity = '0.9';
+                    clone.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.2)';
+                }, 150);
+
+                // Start page transition
+                setTimeout(() => {
+                    pageTransition.classList.add('active');
+                    setTimeout(() => {
+                        loadingContainer.classList.add('show');
+                    }, 300);
+                }, 600);
+
+                // Preload next page
+                setTimeout(() => {
+                    preloadNextPage();
+                }, 800);
+
+                // Navigate to index.html
+                setTimeout(() => {
+                    clone.style.opacity = '0';
+                    clone.style.transform = 'scale(0.8)';
+                    
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 200);
+                }, 1400);
+            }
+
+            // Logo click handler (prevents event bubbling)
+            logoContainer.addEventListener('click', function(e) {
+                e.stopPropagation();
+                triggerTransition(e);
+            });
+
+            // Full page click handler
+            document.addEventListener('click', function(e) {
+                // Don't trigger if clicking on logo (handled separately)
+                if (!logoContainer.contains(e.target) && !isTransitioning) {
+                    triggerTransition(e);
+                }
+            });
+
+            // Enhanced hover effects
+            logoContainer.addEventListener('mouseenter', function() {
+                mainLogo.style.transform = 'translateY(-5px) scale(1.05)';
+                mainLogo.style.boxShadow = '0 25px 50px rgba(0, 0, 0, 0.4), 0 0 60px rgba(96, 165, 250, 0.4)';
+            });
+
+            logoContainer.addEventListener('mouseleave', function() {
+                mainLogo.style.transform = 'translateY(0) scale(1)';
+                mainLogo.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.3), 0 0 40px rgba(96, 165, 250, 0.2)';
+            });
+
+            // Add subtle hover effects to blobs
+            const blobs = document.querySelectorAll('.blob');
+            blobs.forEach((blob, index) => {
+                blob.addEventListener('mouseenter', () => {
+                    blob.style.transform += ' scale(1.1)';
+                    blob.style.filter = 'blur(35px)';
+                });
+                
+                blob.addEventListener('mouseleave', () => {
+                    blob.style.transform = blob.style.transform.replace(' scale(1.1)', '');
+                    blob.style.filter = 'blur(40px)';
+                });
+            });
+
+            // Add entrance animation delay
+            setTimeout(() => {
+                landingContainer.style.opacity = '1';
+                landingContainer.style.transform = 'translateY(0)';
+            }, 100);
+
+            // Start auto-redirect timer after content loads
+            setTimeout(() => {
+                startAutoRedirect();
+            }, 1000);
+        });
+    </script>
+</body>
+</html> 
